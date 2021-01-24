@@ -1,0 +1,325 @@
+type: vertical-stack
+cards:
+  - type: 'custom:mini-media-player'
+    hide_when_off: true
+    hide:
+      volume: false
+      source: false
+      power_state: false
+      controls: true
+    icon_state: true
+    toggle_power: true
+    group: true
+    sound_mode: full
+    source: icon
+    artwork: none
+    info: scroll
+    name: Google Home Som Ambiente
+    replace_mute: play_pause
+    entity: media_player.som_ambiente
+    volume_stateless: false
+  - type: 'custom:button-card'
+    styles:
+      card:
+        - border-radius: 3%
+    entity: media_player.som_ambiente
+    show_entity_picture: true
+    show_name: true
+    layout: icon_state_name2nd
+    show_label: true
+    state:
+      - operator: template
+        value: >
+          [[[ return
+          states['media_player.som_ambiente'].attributes.media_content_id ===
+          'http://mcrscast1.mcr.iol.pt/comercial.mp3' &&
+          states['media_player.som_ambiente'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.som_ambiente'].state + "
+          Comercial"]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: template
+        value: >
+          [[[ return
+          states['media_player.som_ambiente'].attributes.media_content_id ===
+          'http://mcrscast.mcr.iol.pt/m80' &&
+          states['media_player.som_ambiente'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.som_ambiente'].state + "
+          M80"]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: template
+        value: >
+          [[[ return
+          states['media_player.som_ambiente'].attributes.media_content_id ===
+          'http://195.23.102.207/vodafone' &&
+          states['media_player.som_ambiente'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.som_ambiente'].state + "
+          Vodafone"]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: template
+        value: >
+          [[[ return
+          states['media_player.som_ambiente'].attributes.media_content_id ===
+          'https://20863.live.streamtheworld.com/RFM_SC' &&
+          states['media_player.som_ambiente'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.som_ambiente'].state + "
+          RFM"]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: template
+        value: |
+          [[[ return states['media_player.som_ambiente'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.som_ambiente'].state + "
+          " + states['media_player.som_ambiente'].attributes.media_artist + " -
+          " + states['media_player.som_ambiente'].attributes.media_title]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: default
+        label: >
+          [[[ return  'Status: ' +
+          states['media_player.som_ambiente'].state]]]   
+  - type: horizontal-stack
+    cards:
+      - type: 'custom:button-card'
+        tap_action:
+          action: call-service
+          service: script.radio_comercial_ambiente
+        styles:
+          entity_picture:
+            - width: 100%
+          card:
+            - background-color: ivory
+            - border-radius: 3%
+            - padding: 20%
+            - height: 70px
+        entity: media_player.som_ambiente
+        entity_picture: /local/radio_logo/Logo_Radio_Comercial.jpg
+        show_entity_picture: true
+        show_name: false
+        state:
+          - operator: template
+            value: >
+              [[[ return
+              states['media_player.som_ambiente'].attributes.media_content_id
+              === 'http://mcrscast1.mcr.iol.pt/comercial.mp3' &&
+              states['media_player.som_ambiente'].state === 'playing']]]
+            styles:
+              card:
+                - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+      - type: 'custom:button-card'
+        tap_action:
+          action: call-service
+          service: script.vodafone_ambiente
+        styles:
+          entity_picture:
+            - width: 143%
+          card:
+            - background-color: ivory
+            - border-radius: 3%
+            - padding: 16%
+            - height: 70px
+        entity: media_player.som_ambiente
+        entity_picture: /local/radio_logo/logo_vodafone_fm.png
+        show_entity_picture: true
+        show_name: false
+        state:
+          - operator: template
+            value: >
+              [[[ return
+              states['media_player.som_ambiente'].attributes.media_content_id
+               === 'http://195.23.102.207/vodafone' &&
+               states['media_player.som_ambiente'].state === 'playing']]]
+            styles:
+              card:
+                - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+      - type: 'custom:button-card'
+        tap_action:
+          action: call-service
+          service: script.m80_ambiente
+        styles:
+          entity_picture:
+            - width: 100%
+          card:
+            - background-color: ivory
+            - border-radius: 3%
+            - padding: 20%
+            - height: 70px
+        entity: media_player.som_ambiente
+        entity_picture: /local/radio_logo/logo_m80.png
+        show_entity_picture: true
+        show_name: false
+        state:
+          - operator: template
+            value: >
+              [[[ return
+              states['media_player.som_ambiente'].attributes.media_content_id
+              === 'http://mcrscast.mcr.iol.pt/m80' &&
+              states['media_player.som_ambiente'].state === 'playing']]]
+            styles:
+              card:
+                - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+      - type: 'custom:button-card'
+        tap_action:
+          action: call-service
+          service: script.rfm_ambiente
+        styles:
+          entity_picture:
+            - width: 73%
+          card:
+            - background-color: ivory
+            - border-radius: 3%
+            - padding: 17%
+            - color: black
+            - height: 70px
+        entity: media_player.som_ambiente
+        entity_picture: /local/radio_logo/logo_rfm.png
+        show_entity_picture: true
+        show_name: false
+        state:
+          - operator: template
+            value: >
+              [[[ return
+              states['media_player.som_ambiente'].attributes.media_content_id
+              === 'https://20863.live.streamtheworld.com/RFM_SC' &&
+              states['media_player.som_ambiente'].state === 'playing']]]
+            styles:
+              card:
+                - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+  - type: conditional
+    conditions:
+      - entity: media_player.som_ambiente
+        state: playing
+      - entity: sensor.estacoes_radio_ambiente
+        state: Comercial Ambiente
+      - entity: input_boolean.som_ambiente
+        state: 'on'
+    card:
+      type: vertical-stack
+      cards:
+        - type: picture-glance
+          image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+          entities: []
+          camera_image: camera.comercial_camera
+        - type: entities
+          entities:
+            - entity: sensor.artista
+              name: Artista
+            - entity: sensor.musica
+              name: Música
+            - entity: sensor.album
+              name: Álbum
+            - entity: sensor.titulos
+              name: Título
+  - type: conditional
+    conditions:
+      - entity: media_player.som_ambiente
+        state: playing
+      - entity: sensor.estacoes_radio_ambiente
+        state: Vodafone Ambiente
+      - entity: input_boolean.som_ambiente
+        state: 'on'
+    card:
+      type: vertical-stack
+      cards:
+        - type: picture-glance
+          image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+          entities: []
+          camera_image: camera.vodafone_camera
+        - type: entities
+          entities:
+            - entity: sensor.artista_vodafone
+              name: Artista
+            - entity: sensor.musica_vodafone
+              name: Música
+            - entity: sensor.album_vodafone
+              name: Álbum
+            - entity: sensor.titulos_vodafone
+              name: Títulos
+  - type: conditional
+    conditions:
+      - entity: media_player.som_ambiente
+        state: playing
+      - entity: sensor.estacoes_radio_ambiente
+        state: M80 Ambiente
+      - entity: input_boolean.som_ambiente
+        state: 'on'
+    card:
+      type: vertical-stack
+      cards:
+        - type: picture-glance
+          image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+          entities: []
+          camera_image: camera.m80_camera
+        - type: entities
+          entities:
+            - entity: sensor.artista_m80
+              name: Artista
+            - entity: sensor.musica_m80
+              name: Música
+            - entity: sensor.album_m80
+              name: Álbum
+            - entity: sensor.titulos_m80
+              name: Títulos
+  - type: conditional
+    conditions:
+      - entity: media_player.som_ambiente
+        state: playing
+      - entity: sensor.estacoes_radio_ambiente
+        state: RFM Ambiente
+      - entity: input_boolean.som_ambiente
+        state: 'on'
+    card:
+      type: vertical-stack
+      cards:
+        - type: picture-glance
+          image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+          entities: []
+          camera_image: camera.rfm_camera
+        - type: entities
+          entities:
+            - entity: sensor.artista_rfm
+              name: Artista
+            - entity: sensor.rfm_album
+              name: Música

@@ -1,0 +1,316 @@
+type: vertical-stack
+cards:
+  - type: 'custom:mini-media-player'
+    hide_when_off: true
+    hide:
+      volume: false
+      source: false
+      power_state: false
+      controls: true
+    icon_state: true
+    toggle_power: true
+    group: true
+    sound_mode: full
+    source: icon
+    artwork: none
+    info: scroll
+    name: Google Home Escritório
+    replace_mute: play_pause
+    entity: media_player.escritorio
+    volume_stateless: false
+  - type: 'custom:button-card'
+    styles:
+      card:
+        - border-radius: 3%
+    entity: media_player.escritorio
+    show_entity_picture: true
+    show_name: true
+    layout: icon_state_name2nd
+    show_label: true
+    state:
+      - operator: template
+        value: >
+          [[[ return
+          states['media_player.escritorio'].attributes.media_content_id ===
+          'http://mcrscast1.mcr.iol.pt/comercial.mp3' &&
+          states['media_player.escritorio'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.escritorio'].state + "
+          Comercial"]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: template
+        value: >
+          [[[ return
+          states['media_player.escritorio'].attributes.media_content_id ===
+          'http://mcrscast.mcr.iol.pt/m80' &&
+          states['media_player.escritorio'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.escritorio'].state + "
+          M80"]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: template
+        value: >
+          [[[ return
+          states['media_player.escritorio'].attributes.media_content_id ===
+          'http://195.23.102.207/vodafone' &&
+          states['media_player.escritorio'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.escritorio'].state + "
+          Vodafone"]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: template
+        value: >
+          [[[ return
+          states['media_player.escritorio'].attributes.media_content_id ===
+          'https://20863.live.streamtheworld.com/RFM_SC' &&
+          states['media_player.escritorio'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.escritorio'].state + "
+          RFM"]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: template
+        value: |
+          [[[ return states['media_player.escritorio'].state === 'playing']]]
+        label: >
+          [[[ return 'Status: ' + states['media_player.escritorio'].state + " "
+          + states['media_player.escritorio'].attributes.media_artist + " - " +
+          states['media_player.escritorio'].attributes.media_title]]]
+        color: yellow
+        icon: 'mdi:music'
+        styles:
+          card:
+            - animation: blink 2s ease infinite
+          label:
+            - padding: 5px
+          name:
+            - margin-top: '-30px'
+      - operator: default
+        label: |
+          [[[ return  'Status: ' + states['media_player.escritorio'].state]]]   
+  - type: horizontal-stack
+    cards:
+      - type: 'custom:button-card'
+        tap_action:
+          action: call-service
+          service: script.radio_comercial_escritorio
+        styles:
+          entity_picture:
+            - width: 100%
+          card:
+            - background-color: ivory
+            - border-radius: 3%
+            - padding: 20%
+            - height: 70px
+        entity: media_player.escritorio
+        entity_picture: /local/radio_logo/Logo_Radio_Comercial.jpg
+        show_entity_picture: true
+        show_name: false
+        state:
+          - operator: template
+            value: >
+              [[[ return
+              states['media_player.escritorio'].attributes.media_content_id ===
+              'http://mcrscast1.mcr.iol.pt/comercial.mp3' &&
+              states['media_player.escritorio'].state === 'playing']]]
+            styles:
+              card:
+                - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+      - type: 'custom:button-card'
+        tap_action:
+          action: call-service
+          service: script.vodafone_escritorio
+        styles:
+          entity_picture:
+            - width: 143%
+          card:
+            - background-color: ivory
+            - border-radius: 3%
+            - padding: 16%
+            - height: 70px
+        entity: media_player.escritorio
+        entity_picture: /local/radio_logo/logo_vodafone_fm.png
+        show_entity_picture: true
+        show_name: false
+        state:
+          - operator: template
+            value: >
+              [[[ return
+              states['media_player.escritorio'].attributes.media_content_id
+               === 'http://195.23.102.207/vodafone' &&
+               states['media_player.escritorio'].state === 'playing']]]
+            styles:
+              card:
+                - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+      - type: 'custom:button-card'
+        tap_action:
+          action: call-service
+          service: script.m80_escritorio
+        styles:
+          entity_picture:
+            - width: 100%
+          card:
+            - background-color: ivory
+            - border-radius: 3%
+            - padding: 20%
+            - height: 70px
+        entity: media_player.escritorio
+        entity_picture: /local/radio_logo/logo_m80.png
+        show_entity_picture: true
+        show_name: false
+        state:
+          - operator: template
+            value: >
+              [[[ return
+              states['media_player.escritorio'].attributes.media_content_id ===
+              'http://mcrscast.mcr.iol.pt/m80' &&
+              states['media_player.escritorio'].state === 'playing']]]
+            styles:
+              card:
+                - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+      - type: 'custom:button-card'
+        tap_action:
+          action: call-service
+          service: script.rfm_escritorio
+        styles:
+          entity_picture:
+            - width: 73%
+          card:
+            - background-color: ivory
+            - border-radius: 3%
+            - padding: 17%
+            - color: black
+            - height: 70px
+        entity: media_player.escritorio
+        entity_picture: /local/radio_logo/logo_rfm.png
+        show_entity_picture: true
+        show_name: false
+        state:
+          - operator: template
+            value: >
+              [[[ return
+              states['media_player.escritorio'].attributes.media_content_id ===
+              'https://20863.live.streamtheworld.com/RFM_SC' &&
+              states['media_player.escritorio'].state === 'playing']]]
+            styles:
+              card:
+                - box-shadow: 0px 0px 5px 5px var(--button-card-light-color)
+  - type: conditional
+    conditions:
+      - entity: media_player.escritorio
+        state: playing
+      - entity: sensor.estacoes_radio_escritorio
+        state: Comercial Escritório
+    card:
+      type: vertical-stack
+      cards:
+        - type: picture-glance
+          image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+          entities: []
+          camera_image: camera.comercial_camera
+        - type: entities
+          entities:
+            - entity: sensor.artista
+              name: Artista
+            - entity: sensor.musica
+              name: Música
+            - entity: sensor.album
+              name: Álbum
+            - entity: sensor.titulos
+              name: títulos
+  - type: conditional
+    conditions:
+      - entity: media_player.escritorio
+        state: playing
+      - entity: sensor.estacoes_radio_escritorio
+        state: Vodafone Escritório
+    card:
+      type: vertical-stack
+      cards:
+        - type: picture-glance
+          image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+          entities: []
+          camera_image: camera.vodafone_camera
+        - type: entities
+          entities:
+            - entity: sensor.artista_vodafone
+              name: Artista
+            - entity: sensor.musica_vodafone
+              name: Música
+            - entity: sensor.album_vodafone
+              name: Álbum
+            - entity: sensor.titulos_vodafone
+              Name: Títulos
+  - type: conditional
+    conditions:
+      - entity: media_player.escritorio
+        state: playing
+      - entity: sensor.estacoes_radio_escritorio
+        state: M80 Escritório
+    card:
+      type: vertical-stack
+      cards:
+        - type: picture-glance
+          image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+          entities: []
+          camera_image: camera.m80_camera
+        - type: entities
+          entities:
+            - entity: sensor.artista_m80
+              name: Artista
+            - entity: sensor.musica_m80
+              name: Música
+            - entity: sensor.album_m80
+              name: Álbum
+            - entity: sensor.titulos_m80
+              name: Títulos
+  - type: conditional
+    conditions:
+      - entity: media_player.escritorio
+        state: playing
+      - entity: sensor.estacoes_radio_escritorio
+        state: RFM Escritório
+    card:
+      type: vertical-stack
+      cards:
+        - type: picture-glance
+          image: 'https://demo.home-assistant.io/stub_config/kitchen.png'
+          entities: []
+          camera_image: camera.rfm_camera
+        - type: entities
+          entities:
+            - entity: sensor.artista_rfm
+              name: Artista
+            - entity: sensor.rfm_album
+              name: Música
